@@ -1,21 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
-import { contact, img, plans } from '@/lib/data';
+import { contact, heroImage, howItWorks as steps, plans } from '@/lib/data';
 
 export const metadata = { title: 'Meal Plans — ProfitMeals' };
 
-const steps = [
-  ['Tell us your goal', 'A short call or a WhatsApp message. No form to fill in.'],
-  ['We build the rotation', 'Meals picked around your macros, allergies and taste.'],
-  ['Delivered on schedule', 'Same slot every day. Swap or pause any time.'],
-];
-
 const rows = [
-  ['Meals', '12', '24', '48'],
-  ['Protein per meal', '25–35g', '35–45g', '40–55g'],
-  ['Nutritionist check-in', '—', '—', 'Included'],
-  ['Macro report', '—', 'Monthly', 'Weekly'],
+  ['Meals per box', ...plans.map((p) => String(p.meals))],
+  ['Recipes on rotation', ...plans.map((p) => String(p.recipes))],
+  ['6-meal box', ...plans.map((p) => `₹${p.pricing.box6} / meal`)],
+  ['26-meal box', ...plans.map((p) => `₹${p.pricing.box26} / meal`)],
 ];
 
 export default function MealPlansPage() {
@@ -41,7 +35,7 @@ export default function MealPlansPage() {
             </div>
           </div>
           <div className="relative h-[220px] overflow-hidden rounded-2xl bg-line md:h-[280px]">
-            <Image src={img('plan-lifestyle', 900, 700)} alt="Weekly meal plan" fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover" />
+            <Image src={heroImage} alt="Weekly meal plan" fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover" />
           </div>
         </div>
       </section>
@@ -59,13 +53,12 @@ export default function MealPlansPage() {
                 <div className="text-2xl font-semibold text-ink">{p.name}</div>
                 <p className="mt-2 text-[15px] leading-relaxed text-muted">{p.blurb}</p>
                 <div className="my-5 grid grid-cols-2 gap-3.5 border-y border-line py-[18px]">
-                  <div><div className="text-xl font-semibold text-ink">{p.meals} meals</div><div className="text-xs text-faint">per plan</div></div>
-                  <div><div className="text-xl font-semibold text-ink">{p.weeks} weeks</div><div className="text-xs text-faint">duration</div></div>
-                  <div><div className="text-xl font-semibold text-ink">{p.protein}</div><div className="text-xs text-faint">protein per meal</div></div>
-                  <div><div className="text-xl font-semibold text-ink">{p.kcal}</div><div className="text-xs text-faint">kcal per meal</div></div>
+                  <div><div className="text-xl font-semibold text-ink">{p.meals} meals</div><div className="text-xs text-faint">per box</div></div>
+                  <div><div className="text-xl font-semibold text-ink">{p.recipes}</div><div className="text-xs text-faint">recipes on rotation</div></div>
+                  <div><div className="text-xl font-semibold text-ink">₹{p.pricing.box6}</div><div className="text-xs text-faint">per meal · 6-box</div></div>
+                  <div><div className="text-xl font-semibold text-ink">₹{p.pricing.box26}</div><div className="text-xs text-faint">per meal · 26-box</div></div>
                 </div>
-                <div className="text-[13px] font-semibold text-ink">Who it&apos;s for</div>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted">{p.who}</p>
+                <div className="text-[13px] font-semibold text-ink">What&apos;s included</div>
                 <div className="mt-4 flex flex-col gap-2.5">
                   {p.benefits.map((b) => (
                     <div key={b} className="flex items-start gap-2.5">
@@ -108,9 +101,9 @@ export default function MealPlansPage() {
             <thead className="bg-[#F8F8F8]">
               <tr>
                 <th className="p-4 text-[13px] font-semibold text-ink" />
-                <th className="p-4 text-sm font-semibold text-ink">Starter</th>
-                <th className="p-4 text-sm font-semibold text-ink">Fitness</th>
-                <th className="p-4 text-sm font-semibold text-ink">Transformation</th>
+                {plans.map((p) => (
+                  <th key={p.slug} className="p-4 text-sm font-semibold text-ink">{p.name}</th>
+                ))}
               </tr>
             </thead>
             <tbody>

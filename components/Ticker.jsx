@@ -1,10 +1,4 @@
-const items = [
-  '30g+ protein in most meals',
-  'Cooked fresh every morning',
-  'Weighed, not estimated',
-  '40+ meals on rotation',
-  'Never frozen',
-];
+import { marqueeItems as items } from '@/lib/data';
 
 export default function Ticker() {
   return (

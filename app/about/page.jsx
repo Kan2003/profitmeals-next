@@ -1,15 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
-import { img } from '@/lib/data';
+import { photo } from '@/lib/data';
 
 export const metadata = { title: 'About — ProfitMeals' };
 
 const steps = [
-  ['Sourced', 'Produce and protein arrive before the kitchen opens.', 'about-sourcing'],
-  ['Weighed', 'Portions go on a scale, so the label is accurate.', 'about-prep'],
-  ['Cooked', 'Chefs cook in small batches, not a warehouse line.', 'about-cooking'],
-  ['Packed', 'Sealed hot and out for the same delivery slot.', 'about-packing'],
+  ['Sourced', 'Produce and protein arrive before the kitchen opens.', 'photo-1518843875459-f738682238a6'],
+  ['Weighed', 'Portions go on a scale, so the label is accurate.', 'photo-1466637574441-749b8f19452f'],
+  ['Cooked', 'Chefs cook in small batches, not a warehouse line.', 'photo-1577219491135-ce391730fb2c'],
+  ['Packed', 'Sealed hot and out for the same delivery slot.', 'photo-1526367790999-0150786686a2'],
 ];
 
 const panels = [
@@ -17,13 +17,13 @@ const panels = [
     label: 'OUR INGREDIENTS',
     title: 'Short lists, real names.',
     body: 'Chicken breast, paneer, brown rice, millets, seasonal vegetables, cold-pressed oils. Nothing on a label that you would not recognise in a kitchen.',
-    seeds: ['ing-produce', 'ing-grains', 'ing-protein'],
+    seeds: ['photo-1610832958506-aa56368176cf', 'photo-1586201375761-83865001e31c', 'photo-1532550907401-a500c9a57435'],
   },
   {
     label: 'OUR KITCHEN',
     title: 'Ours, not rented by the hour.',
     body: 'A single FSSAI-licensed kitchen we run ourselves, so we control the sourcing, the portioning and the timing end to end.',
-    seeds: ['kit-line', 'kit-station', 'kit-team'],
+    seeds: ['photo-1556910633-5099dc3971e8', 'photo-1577219491135-ce391730fb2c', 'photo-1556909114-f6e7ad7d3136'],
   },
 ];
 
@@ -46,7 +46,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="relative h-[260px] overflow-hidden rounded-2xl bg-line md:h-[360px]">
-              <Image src={img('about-founders', 900, 800)} alt="Founders in the kitchen" fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover" />
+              <Image src={photo('photo-1556909114-f6e7ad7d3136', 900)} alt="Founders in the kitchen" fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover" />
             </div>
           </div>
         </div>
@@ -56,7 +56,7 @@ export default function AboutPage() {
         <Reveal>
           <div className="grid items-center gap-14 lg:grid-cols-2">
             <div className="relative order-2 h-[240px] overflow-hidden rounded-2xl bg-line md:h-[320px] lg:order-1">
-              <Image src={img('about-early', 900, 700)} alt="Early days" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+              <Image src={photo('photo-1556910633-5099dc3971e8', 900)} alt="Early days" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
             </div>
             <div className="order-1 lg:order-2">
               <div className="text-xs tracking-[0.1em] text-faint">WHY WE STARTED</div>
@@ -90,7 +90,7 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="relative h-[240px] overflow-hidden rounded-2xl bg-line md:h-[320px]">
-              <Image src={img('about-recipe', 900, 700)} alt="Recipe development" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+              <Image src={photo('photo-1414235077428-338989a2e8c0', 900)} alt="Recipe development" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
             </div>
           </div>
         </Reveal>
@@ -104,7 +104,7 @@ export default function AboutPage() {
             <Reveal key={t} delay={i * 60}>
               <div className="h-full overflow-hidden rounded-card border border-line bg-white">
                 <div className="relative h-40 w-full bg-line">
-                  <Image src={img(seed, 600, 450)} alt={t} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover" />
+                  <Image src={photo(seed, 600)} alt={t} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover" />
                 </div>
                 <div className="p-5">
                   <span className="grid h-7 w-7 place-items-center rounded-full bg-ink text-[13px] font-semibold text-white">{i + 1}</span>
@@ -127,7 +127,7 @@ export default function AboutPage() {
               <div className="mt-5 grid grid-cols-3 gap-2.5">
                 {p.seeds.map((s) => (
                   <div key={s} className="relative h-24 overflow-hidden rounded-[10px] bg-line">
-                    <Image src={img(s, 400, 400)} alt="" fill sizes="20vw" className="object-cover" />
+                    <Image src={photo(s, 400)} alt="" fill sizes="20vw" className="object-cover" />
                   </div>
                 ))}
               </div>

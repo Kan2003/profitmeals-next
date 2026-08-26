@@ -1,9 +1,12 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { contact } from '@/lib/data';
+import { WhatsAppIcon } from './SocialIcons';
 
 const nav = [
   { href: '/meals', label: 'Meals' },
@@ -30,9 +33,8 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur">
       <div className="mx-auto flex h-[72px] max-w-[1440px] items-center gap-10 px-5 md:px-12">
-        <Link href="/" className="flex items-center gap-2.5 no-underline">
-          <span className="h-7 w-7 rounded-md bg-green" />
-          <span className="text-[17px] font-bold tracking-[0.04em] text-ink">PROFITMEALS</span>
+        <Link href="/" className="relative h-10 w-[92px] shrink-0 no-underline">
+          <Image src="/logo-mark.png" alt="ProFit Meals" fill sizes="92px" className="object-contain" priority />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
@@ -76,9 +78,8 @@ export default function Header() {
       {mounted && open && createPortal(
         <div className="fixed inset-0 z-50 overflow-y-auto bg-white p-5 lg:hidden">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <span className="h-6 w-6 rounded bg-green" />
-              <span className="text-[15px] font-bold tracking-[0.04em] text-ink">PROFITMEALS</span>
+            <div className="relative h-9 w-[82px]">
+              <Image src="/logo-mark.png" alt="ProFit Meals" fill sizes="82px" className="object-contain" />
             </div>
             <button
               aria-label="Close menu"
@@ -104,7 +105,13 @@ export default function Header() {
             <Link href="/meals" onClick={() => setOpen(false)} className="flex h-[52px] items-center justify-center rounded-[3px] bg-green text-base font-medium text-white no-underline hover:text-white">
               Explore Meals
             </Link>
-            <a href="https://wa.me/910000000000" className="flex h-[52px] items-center justify-center rounded-[3px] border border-[#CDCDCD] text-base font-medium text-ink no-underline hover:text-ink">
+            <a
+              href={contact.whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-[52px] items-center justify-center gap-2 rounded-[3px] border border-[#CDCDCD] text-base font-medium text-ink no-underline hover:text-ink"
+            >
+              <WhatsAppIcon className="h-5 w-5" />
               WhatsApp Us
             </a>
           </div>
