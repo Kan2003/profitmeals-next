@@ -1,15 +1,16 @@
 import Image from 'next/image';
 import Accordion from '@/components/Accordion';
 import ContactForm from '@/components/ContactForm';
-import { contact, faqs, img, zones } from '@/lib/data';
+import { contact, faqs, photo, zones } from '@/lib/data';
+import { InstagramIcon, MailIcon, PhoneIcon, WhatsAppIcon } from '@/components/SocialIcons';
 
 export const metadata = { title: 'Contact — ProfitMeals' };
 
 const channels = [
-  { name: 'WhatsApp', sub: 'Fastest reply, 9am – 9pm', value: contact.phone, cta: 'Message Us', href: contact.whatsappHref, primary: true },
-  { name: 'Phone', sub: 'For plans and bulk orders', value: contact.phone, cta: 'Call Us', href: contact.phoneHref },
-  { name: 'Instagram', sub: 'Daily menu and kitchen updates', value: contact.instagramHandle, cta: 'Follow', href: contact.instagramHref },
-  { name: 'Email', sub: 'Corporate and partnerships', value: contact.email, cta: 'Write to Us', href: contact.emailHref },
+  { name: 'WhatsApp', sub: 'Fastest reply, 9am – 9pm', value: contact.phone, cta: 'Message Us', href: contact.whatsappHref, primary: true, Icon: WhatsAppIcon },
+  { name: 'Phone', sub: 'For plans and bulk orders', value: contact.phone, cta: 'Call Us', href: contact.phoneHref, Icon: PhoneIcon },
+  { name: 'Instagram', sub: 'Daily menu and kitchen updates', value: contact.instagramHandle, cta: 'Follow', href: contact.instagramHref, Icon: InstagramIcon },
+  { name: 'Email', sub: 'Corporate and partnerships', value: contact.email, cta: 'Write to Us', href: contact.emailHref, Icon: MailIcon },
 ];
 
 export default function ContactPage() {
@@ -29,9 +30,13 @@ export default function ContactPage() {
               <a
                 key={c.name}
                 href={c.href}
+                target={c.href.startsWith('http') ? '_blank' : undefined}
+                rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 className={`block rounded-card p-6 no-underline transition-transform hover:-translate-y-1 ${c.primary ? 'border border-white/30 bg-forestdeep' : 'border border-line bg-white'}`}
               >
-                <span className={`block h-9 w-9 rounded-[9px] border ${c.primary ? 'border-white/50' : 'border-[#CDCDCD]'}`} />
+                <span className={`flex h-9 w-9 items-center justify-center rounded-[9px] border ${c.primary ? 'border-white/50 text-white' : 'border-[#CDCDCD] text-ink'}`}>
+                  <c.Icon className="h-[18px] w-[18px]" />
+                </span>
                 <div className={`mt-4 text-lg font-semibold ${c.primary ? 'text-white' : 'text-ink'}`}>{c.name}</div>
                 <div className={`mt-1 text-sm ${c.primary ? 'text-[#D9EDD7]' : 'text-muted'}`}>{c.sub}</div>
                 <div className={`mt-3.5 text-[17px] font-semibold ${c.primary ? 'text-white' : 'text-ink'}`}>{c.value}</div>
@@ -56,7 +61,7 @@ export default function ContactPage() {
           <h2 className="text-[26px] font-semibold tracking-[-0.02em] text-ink md:text-[32px]">Where we deliver</h2>
           <p className="mt-2 text-[15px] text-muted">One kitchen, three delivery zones, fixed slots.</p>
           <div className="relative mt-5 h-[240px] overflow-hidden rounded-card bg-line">
-            <Image src={img('service-map', 900, 600)} alt="Service area" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+            <Image src={photo('photo-1526367790999-0150786686a2', 900)} alt="Delivery in progress" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
           </div>
           <div className="mt-4 overflow-hidden rounded-card border border-line">
             {zones.map((z, i) => (

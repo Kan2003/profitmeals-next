@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { img } from '@/lib/data';
+import { photo } from '@/lib/data';
 import MacroStrip from './MacroStrip';
 
 export default function MealCard({ meal }) {
@@ -11,7 +11,7 @@ export default function MealCard({ meal }) {
     >
       <div className="relative h-[190px] w-full overflow-hidden bg-line">
         <Image
-          src={img(meal.slug, 800, 600)}
+          src={photo(meal.photoId, 800)}
           alt={meal.name}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
@@ -29,10 +29,7 @@ export default function MealCard({ meal }) {
             </span>
           )}
         </div>
-        <div className="mt-3 flex items-baseline justify-between gap-3">
-          <div className="text-[19px] font-semibold leading-tight text-ink">{meal.name}</div>
-          <div className="whitespace-nowrap text-[13px] font-medium text-muted">★ {meal.rating}</div>
-        </div>
+        <div className="mt-3 text-[19px] font-semibold leading-tight text-ink">{meal.name}</div>
         <p className="mt-2 text-sm leading-relaxed text-muted">{meal.desc}</p>
         <MacroStrip meal={meal} />
         <div className="mt-4 flex items-center justify-between">

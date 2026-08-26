@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
-import { img, testimonials } from '@/lib/data';
+import { photo, testimonials } from '@/lib/data';
 
 export const metadata = { title: 'Why Us — ProfitMeals' };
 
@@ -20,7 +20,12 @@ const process = [
   ['Packed and out the door', 'Sealed hot, delivered in the same slot every day.'],
 ];
 
-const gallery = [['why-prep', 220], ['why-packing', 220], ['why-scale', 160], ['why-delivery', 160]];
+const gallery = [
+  ['photo-1466637574441-749b8f19452f', 220],
+  ['photo-1526367790999-0150786686a2', 220],
+  ['photo-1540420773420-3366772f4999', 160],
+  ['photo-1414235077428-338989a2e8c0', 160],
+];
 
 export default function WhyUsPage() {
   return (
@@ -35,9 +40,13 @@ export default function WhyUsPage() {
             Every meal is weighed, cooked and packed in our own kitchen the morning it goes out. Nothing is reheated from a warehouse.
           </p>
           <div className="mt-11 grid grid-cols-2 gap-3.5 lg:grid-cols-[2fr_1fr_1fr]">
-            {[['why-kitchen', 'Kitchen'], ['why-ingredients', 'Ingredients'], ['why-chef', 'Chef at work']].map(([seed, alt]) => (
-              <div key={seed} className="relative h-[200px] overflow-hidden rounded-t-xl bg-line md:h-[300px]">
-                <Image src={img(seed, 900, 700)} alt={alt} fill sizes="(max-width: 1024px) 50vw, 33vw" className="object-cover" />
+            {[
+              ['photo-1556910633-5099dc3971e8', 'Kitchen'],
+              ['photo-1518843875459-f738682238a6', 'Ingredients'],
+              ['photo-1577219491135-ce391730fb2c', 'Chef at work'],
+            ].map(([photoId, alt]) => (
+              <div key={photoId} className="relative h-[200px] overflow-hidden rounded-t-xl bg-line md:h-[300px]">
+                <Image src={photo(photoId, 900)} alt={alt} fill sizes="(max-width: 1024px) 50vw, 33vw" className="object-cover" />
               </div>
             ))}
           </div>
@@ -81,9 +90,9 @@ export default function WhyUsPage() {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3.5">
-            {gallery.map(([seed, h]) => (
-              <div key={seed} className="relative overflow-hidden rounded-xl bg-line" style={{ height: h }}>
-                <Image src={img(seed, 600, 500)} alt="" fill sizes="25vw" className="object-cover" />
+            {gallery.map(([photoId, h]) => (
+              <div key={photoId} className="relative overflow-hidden rounded-xl bg-line" style={{ height: h }}>
+                <Image src={photo(photoId, 600)} alt="" fill sizes="25vw" className="object-cover" />
               </div>
             ))}
           </div>
@@ -96,13 +105,13 @@ export default function WhyUsPage() {
         </h2>
         <div className="mt-7 grid gap-5 lg:grid-cols-3">
           {testimonials.map((t, i) => (
-            <Reveal key={t.seed} delay={i * 60}>
+            <Reveal key={t.name} delay={i * 60}>
               <div className="h-full rounded-card border border-line bg-white p-6">
                 <div className="text-[13px] font-medium text-muted">★★★★★</div>
                 <p className="mt-3 text-base leading-relaxed text-ink">{t.quote}</p>
                 <div className="mt-5 flex items-center gap-3">
                   <span className="relative h-10 w-10 overflow-hidden rounded-full bg-line">
-                    <Image src={img(t.seed, 120, 120)} alt="" fill sizes="40px" className="object-cover" />
+                    <Image src={t.avatar} alt="" fill sizes="40px" className="object-cover" />
                   </span>
                   <div>
                     <div className="text-sm font-semibold text-ink">{t.name}</div>

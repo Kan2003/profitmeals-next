@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import Ticker from '@/components/Ticker';
 import MealExplorer from '@/components/MealExplorer';
-import { contact, goals, img, plans, testimonials } from '@/lib/data';
+import { contact, goals, heroImage, photo, plans, testimonials } from '@/lib/data';
 
 export default function Home() {
   return (
@@ -41,7 +41,7 @@ export default function Home() {
 
           <div className="relative">
             <div className="relative h-[320px] overflow-hidden rounded-2xl border border-line md:h-[460px]">
-              <Image src={img('hero-bowl', 1200, 900)} alt="Signature protein bowl" fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+              <Image src={heroImage} alt="Signature protein bowl" fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
             </div>
             <div className="absolute bottom-5 right-4 w-[230px] animate-float rounded-xl border border-line bg-white p-4 shadow-[0_10px_28px_rgba(0,0,0,0.22)] lg:-left-8 lg:right-auto">
               <div className="text-[10px] font-medium tracking-[0.12em] text-faint">PER SERVING</div>
@@ -104,7 +104,7 @@ export default function Home() {
                   className="group block h-full overflow-hidden rounded-card border border-line bg-white no-underline transition-all duration-200 hover:-translate-y-1.5 hover:border-green hover:shadow-[0_16px_32px_rgba(0,0,0,0.10)]"
                 >
                   <div className="relative h-[130px] w-full overflow-hidden bg-line">
-                    <Image src={img(g.seed, 600, 400)} alt={g.title} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <Image src={photo(g.photoId, 600)} alt={g.title} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
                   </div>
                   <div className="p-5">
                     <div className="text-[19px] font-semibold text-ink">{g.title}</div>
@@ -146,9 +146,9 @@ export default function Home() {
                   <div className="text-xl font-semibold text-ink">{p.name}</div>
                   <p className="mt-2 text-sm leading-relaxed text-muted">{p.blurb}</p>
                   <div className="mt-4 flex gap-5">
-                    <div><div className="text-[17px] font-semibold text-ink">{p.meals}</div><div className="text-[11px] text-faint">meals</div></div>
-                    <div><div className="text-[17px] font-semibold text-ink">{p.protein}</div><div className="text-[11px] text-faint">protein</div></div>
-                    <div><div className="text-[17px] font-semibold text-ink">{p.weeks} wks</div><div className="text-[11px] text-faint">duration</div></div>
+                    <div><div className="text-[17px] font-semibold text-ink">{p.meals}</div><div className="text-[11px] text-faint">meals / box</div></div>
+                    <div><div className="text-[17px] font-semibold text-ink">{p.recipes}</div><div className="text-[11px] text-faint">recipes</div></div>
+                    <div><div className="text-[17px] font-semibold text-ink">₹{p.pricing.box26}</div><div className="text-[11px] text-faint">per meal</div></div>
                   </div>
                   <Link href="/meal-plans" className="mt-5 inline-block text-sm font-medium text-green no-underline hover:text-forest">
                     Explore Plan →
@@ -165,9 +165,14 @@ export default function Home() {
         <div className="mx-auto grid max-w-[1440px] items-center gap-14 px-5 py-16 md:px-12 md:py-[72px] lg:grid-cols-2">
           <Reveal>
             <div className="grid grid-cols-2 gap-3.5">
-              {[['kitchen', 190], ['ingredients', 190], ['chef', 150], ['prep', 150]].map(([seed, h]) => (
-                <div key={seed} className="relative overflow-hidden rounded-xl bg-line" style={{ height: h }}>
-                  <Image src={img(seed, 600, 500)} alt={seed} fill sizes="(max-width: 1024px) 50vw, 25vw" className="object-cover" />
+              {[
+                ['kitchen', 'photo-1556910633-5099dc3971e8', 190],
+                ['ingredients', 'photo-1518843875459-f738682238a6', 190],
+                ['chef', 'photo-1577219491135-ce391730fb2c', 150],
+                ['prep', 'photo-1466637574441-749b8f19452f', 150],
+              ].map(([label, photoId, h]) => (
+                <div key={label} className="relative overflow-hidden rounded-xl bg-line" style={{ height: h }}>
+                  <Image src={photo(photoId, 600)} alt={label} fill sizes="(max-width: 1024px) 50vw, 25vw" className="object-cover" />
                 </div>
               ))}
             </div>
@@ -214,13 +219,13 @@ export default function Home() {
           </Reveal>
           <div className="mt-8 grid gap-5 lg:grid-cols-3">
             {testimonials.map((t, i) => (
-              <Reveal key={t.seed} delay={i * 60}>
+              <Reveal key={t.name} delay={i * 60}>
                 <div className="h-full rounded-card border border-line p-6">
                   <div className="text-[13px] font-medium text-muted">★★★★★</div>
                   <p className="mt-3 text-base leading-relaxed text-ink">{t.quote}</p>
                   <div className="mt-5 flex items-center gap-3">
                     <span className="relative h-10 w-10 overflow-hidden rounded-full bg-line">
-                      <Image src={img(t.seed, 120, 120)} alt="" fill sizes="40px" className="object-cover" />
+                      <Image src={t.avatar} alt="" fill sizes="40px" className="object-cover" />
                     </span>
                     <div>
                       <div className="text-sm font-semibold text-ink">{t.name}</div>
