@@ -7,9 +7,9 @@ export const metadata = { title: 'Meal Plans — ProfitMeals' };
 
 const rows = [
   ['Meals per box', ...plans.map((p) => String(p.meals))],
-  ['Recipes on rotation', ...plans.map((p) => String(p.recipes))],
-  ['6-meal box', ...plans.map((p) => `₹${p.pricing.box6} / meal`)],
-  ['26-meal box', ...plans.map((p) => `₹${p.pricing.box26} / meal`)],
+  ['Trial Meal', ...plans.map((p) => `₹${p.trial} / trio`)],
+  ['6-meal box', ...plans.map((p) => p.pricing.box6 ? `₹${p.pricing.box6} / meal` : '—')],
+  ['26-meal box', ...plans.map((p) => p.pricing.box26 ? `₹${p.pricing.box26} / meal` : '—')],
 ];
 
 export default function MealPlansPage() {
@@ -29,12 +29,12 @@ export default function MealPlansPage() {
               <Link href="/contact" className="inline-flex h-[52px] items-center rounded-[3px] bg-green px-6 text-base font-medium text-white no-underline transition-transform hover:-translate-y-0.5 hover:text-white">
                 Talk to Us About a Plan
               </Link>
-              <Link href="/meals" className="inline-flex h-[52px] items-center rounded-[3px] border border-[#CDCDCD] bg-white px-6 text-base font-medium text-ink no-underline hover:text-ink">
-                View Menu
+              <Link href="/contact" className="inline-flex h-[52px] items-center rounded-[3px] border border-[#CDCDCD] bg-white px-6 text-base font-medium text-ink no-underline hover:text-ink">
+                Contact Us
               </Link>
             </div>
           </div>
-          <div className="relative h-[220px] overflow-hidden rounded-2xl bg-line md:h-[280px]">
+          <div className="relative h-[280px] overflow-hidden rounded-2xl bg-line md:h-[360px]">
             <Image src={heroImage} alt="Weekly meal plan" fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover" />
           </div>
         </div>
@@ -54,9 +54,9 @@ export default function MealPlansPage() {
                 <p className="mt-2 text-[15px] leading-relaxed text-muted">{p.blurb}</p>
                 <div className="my-5 grid grid-cols-2 gap-3.5 border-y border-line py-[18px]">
                   <div><div className="text-xl font-semibold text-ink">{p.meals} meals</div><div className="text-xs text-faint">per box</div></div>
-                  <div><div className="text-xl font-semibold text-ink">{p.recipes}</div><div className="text-xs text-faint">recipes on rotation</div></div>
-                  <div><div className="text-xl font-semibold text-ink">₹{p.pricing.box6}</div><div className="text-xs text-faint">per meal · 6-box</div></div>
-                  <div><div className="text-xl font-semibold text-ink">₹{p.pricing.box26}</div><div className="text-xs text-faint">per meal · 26-box</div></div>
+                  <div><div className="text-xl font-semibold text-green">₹{p.trial}</div><div className="text-xs text-faint">trial / trio</div></div>
+                  <div><div className="text-xl font-semibold text-ink">{p.pricing.box6 ? `₹${p.pricing.box6}` : '—'}</div><div className="text-xs text-faint">per meal · 6-box</div></div>
+                  <div><div className="text-xl font-semibold text-ink">{p.pricing.box26 ? `₹${p.pricing.box26}` : '—'}</div><div className="text-xs text-faint">per meal · 26-box</div></div>
                 </div>
                 <div className="text-[13px] font-semibold text-ink">What&apos;s included</div>
                 <div className="mt-4 flex flex-col gap-2.5">

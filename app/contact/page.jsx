@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Accordion from '@/components/Accordion';
 import ContactForm from '@/components/ContactForm';
-import { contact, faqs, photo, zones } from '@/lib/data';
+import { contact, deliveryAreas, faqs, photo, zones } from '@/lib/data';
 import { InstagramIcon, MailIcon, PhoneIcon, WhatsAppIcon } from '@/components/SocialIcons';
 
 export const metadata = { title: 'Contact — ProfitMeals' };
@@ -20,10 +20,10 @@ export default function ContactPage() {
         <div className="mx-auto max-w-[1440px] px-5 py-14 md:px-12">
           <div className="text-[13px] text-white/60">Home / Contact</div>
           <h1 className="mt-3 text-[38px] font-semibold leading-[1.02] tracking-[-0.035em] text-white md:text-[56px]">
-            Ready to Eat Better?
+            Take an Enquiry
           </h1>
           <p className="mt-3.5 max-w-[560px] text-[17px] leading-relaxed text-[#C9E2C5] md:text-lg">
-            Explore our meals and find something that fits your goals. Orders and plan enquiries are handled over WhatsApp or phone.
+            Tell us what you need — meal type, variety, and slot — and we will get back to you on WhatsApp within the hour.
           </p>
           <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {channels.map((c) => (
@@ -51,26 +51,30 @@ export default function ContactPage() {
 
       <section className="mx-auto grid max-w-[1440px] gap-14 px-5 py-14 md:px-12 lg:grid-cols-2">
         <div>
-          <h2 className="text-[26px] font-semibold tracking-[-0.02em] text-ink md:text-[32px]">Send us a message</h2>
-          <p className="mt-2 text-[15px] text-muted">Four fields. We reply on WhatsApp unless you ask otherwise.</p>
+          <h2 className="text-[26px] font-semibold tracking-[-0.02em] text-ink md:text-[32px]">Submit your enquiry</h2>
+          <p className="mt-2 text-[15px] text-muted">Fill in the details below. We reply on WhatsApp within the hour.</p>
           <div className="mt-6">
             <ContactForm />
           </div>
         </div>
         <div>
           <h2 className="text-[26px] font-semibold tracking-[-0.02em] text-ink md:text-[32px]">Where we deliver</h2>
-          <p className="mt-2 text-[15px] text-muted">One kitchen, three delivery zones, fixed slots.</p>
-          <div className="relative mt-5 h-[240px] overflow-hidden rounded-card bg-line">
+          <p className="mt-2 text-[15px] text-muted">Delivered straight to your doorstep across Indore.</p>
+          <div className="relative mt-5 h-[200px] overflow-hidden rounded-card bg-line">
             <Image src={photo('photo-1526367790999-0150786686a2', 900)} alt="Delivery in progress" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
           </div>
-          <div className="mt-4 overflow-hidden rounded-card border border-line">
-            {zones.map((z, i) => (
-              <div key={z.zone} className={`flex justify-between p-3.5 ${i < zones.length - 1 ? 'border-b border-line' : ''}`}>
-                <span className="text-sm text-ink">{z.zone}</span>
-                <span className="text-sm text-muted">{z.slots}</span>
-              </div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {deliveryAreas.map((area) => (
+              <span
+                key={area}
+                className="inline-flex items-center gap-1.5 rounded-full border border-mintline bg-mint px-3.5 py-1.5 text-[13px] font-medium text-forest"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-green" />
+                {area}
+              </span>
             ))}
           </div>
+          <p className="mt-3 text-[13px] text-muted">Don&apos;t see your area? WhatsApp us — we&apos;re expanding.</p>
           <div className="mt-5 flex gap-6 border-t border-line pt-4">
             <div>
               <div className="text-[13px] font-semibold text-ink">Kitchen hours</div>

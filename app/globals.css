@@ -7,7 +7,58 @@
 body { background: #fff; color: #333; }
 
 a { color: #2A90D6; }
-a:hover { color: #1f6ea8; }
+/* a:hover { color: #1f6ea8; } */
+
+/* Contact Us button — shimmer sweep on hover */
+.btn-contact {
+  position: relative;
+  overflow: hidden;
+}
+.btn-contact::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255,255,255,0.45) 50%,
+    transparent 65%
+  );
+  transform: translateX(-100%);
+  transition: transform 0s;
+}
+.btn-contact:hover::after {
+  transform: translateX(100%);
+  transition: transform 0.55s ease;
+}
+.btn-contact:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* Page fade-in transition */
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-transition {
+  animation: page-in 0.45s ease forwards;
+}
+
+/* WhatsApp button attention bounce */
+@keyframes wa-bounce {
+  0%, 80%, 100% { transform: translateY(0); }
+  86%           { transform: translateY(-10px); }
+  92%           { transform: translateY(-4px); }
+  96%           { transform: translateY(-7px); }
+}
+.wa-bounce { animation: wa-bounce 5s ease-in-out infinite; }
+
+/* Slim low-opacity scrollbar */
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.32); }
+* { scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.18) transparent; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
