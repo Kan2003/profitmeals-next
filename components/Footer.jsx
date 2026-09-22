@@ -47,7 +47,6 @@ export default function Footer() {
           </div>
           <div className="flex flex-col gap-2.5">
             <div className="text-[13px] font-semibold text-ink">Explore</div>
-            <Link className="text-sm text-muted no-underline hover:text-ink" href="/meals">Meals</Link>
             <Link className="text-sm text-muted no-underline hover:text-ink" href="/meal-plans">Meal Plans</Link>
             <Link className="text-sm text-muted no-underline hover:text-ink" href="/why-us">Why Us</Link>
           </div>

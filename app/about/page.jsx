@@ -143,7 +143,7 @@ export default function AboutPage() {
             <p className="mt-2.5 text-base text-[#D9EDD7]">Explore our meals and find something that fits your goals.</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link href="/meals" className="inline-flex h-[52px] items-center rounded-[3px] bg-white px-6 text-base font-medium text-forest no-underline hover:text-forest">Explore Meals</Link>
+            <Link href="/meal-plans" className="inline-flex h-[52px] items-center rounded-[3px] bg-white px-6 text-base font-medium text-forest no-underline hover:text-forest">View Meal Plans</Link>
             <Link href="/contact" className="inline-flex h-[52px] items-center rounded-[3px] border border-white/50 px-6 text-base font-medium text-white no-underline hover:text-white">Contact Us</Link>
           </div>
         </div>

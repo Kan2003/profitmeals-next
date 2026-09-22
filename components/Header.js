@@ -9,7 +9,6 @@ import { contact } from '@/lib/data';
 import { WhatsAppIcon } from './SocialIcons';
 
 const nav = [
-  { href: '/meals', label: 'Meals' },
   { href: '/meal-plans', label: 'Meal Plans' },
   { href: '/why-us', label: 'Why Us' },
   { href: '/about', label: 'About' },
@@ -58,10 +57,10 @@ export default function Header() {
 
         <div className="ml-auto flex items-center gap-3">
           <Link
-            href="/meals"
-            className="hidden h-[42px] items-center rounded-[3px] bg-green px-5 text-[15px] font-medium text-white no-underline transition-transform hover:-translate-y-0.5 hover:text-white sm:inline-flex"
+            href="/contact"
+            className="btn-contact hidden h-[42px] items-center rounded-[3px] bg-green px-5 text-[15px] font-medium text-white no-underline transition-[transform,box-shadow,background-color] duration-200 sm:inline-flex"
           >
-            Explore Meals
+            Contact Us
           </Link>
           <button
             aria-label="Open menu"
@@ -102,8 +101,8 @@ export default function Header() {
             ))}
           </div>
           <div className="mt-7 flex flex-col gap-2.5">
-            <Link href="/meals" onClick={() => setOpen(false)} className="flex h-[52px] items-center justify-center rounded-[3px] bg-green text-base font-medium text-white no-underline hover:text-white">
-              Explore Meals
+            <Link href="/contact" onClick={() => setOpen(false)} className="btn-contact flex h-[52px] items-center justify-center rounded-[3px] bg-green text-base font-medium text-white no-underline transition-[transform,box-shadow,background-color] duration-200 hover:text-white">
+              Contact Us
             </Link>
             <a
               href={contact.whatsappHref}
