@@ -2,12 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ProFit Meals brand — Warm Ivory #F4F0E6 / Deep Forest Green #183A32 / Charcoal #242724 */
 :root { color-scheme: light; }
 
-body { background: #fff; color: #333; }
+body {
+  background: #F4F0E6;
+  color: #242724;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-a { color: #2A90D6; }
-/* a:hover { color: #1f6ea8; } */
+a { color: #183A32; }
+
+::selection { background: #183A32; color: #F4F0E6; }
+
+/* Visible keyboard focus in brand green */
+:focus-visible {
+  outline: 2px solid #183A32;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline-offset: 0; }
 
 /* Contact Us button — shimmer sweep on hover */
 .btn-contact {
@@ -56,9 +72,9 @@ a { color: #2A90D6; }
 /* Slim low-opacity scrollbar */
 ::-webkit-scrollbar { width: 3px; height: 3px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.32); }
-* { scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.18) transparent; }
+::-webkit-scrollbar-thumb { background: rgba(36,39,36,0.2); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(36,39,36,0.35); }
+* { scrollbar-width: thin; scrollbar-color: rgba(36,39,36,0.2) transparent; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

@@ -5,20 +5,84 @@ import Footer from '@/components/Footer';
 import SmoothScroll from '@/components/SmoothScroll';
 import PageTransition from '@/components/PageTransition';
 import { WhatsAppIcon } from '@/components/SocialIcons';
+import Script from 'next/script';
 import { contact } from '@/lib/data';
+import {
+  BASE_KEYWORDS,
+  DEFAULT_DESCRIPTION,
+  DEFAULT_TITLE,
+  SITE_NAME,
+  SITE_URL,
+  businessJsonLd,
+  jsonLd,
+  websiteJsonLd,
+} from '@/lib/seo';
 
-const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], display: 'swap' });
+// Optional — set at build time to switch on Google Analytics 4 / Search Console verification.
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const GOOGLE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+
+// Brand typeface — 400 body · 500 labels · 600 subheadings · 700 headings · 800 prices/numbers
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-jakarta',
+  display: 'swap',
+});
 
 export const metadata = {
-  title: 'ProfitMeals — High Protein. Full Flavor. Better You.',
-  description:
-    'Freshly prepared meals designed for your fitness goals, busy lifestyle, and everyday health.',
+  metadataBase: new URL(SITE_URL),
+  title: { default: DEFAULT_TITLE, template: `%s | ${SITE_NAME}` },
+  description: DEFAULT_DESCRIPTION,
+  keywords: BASE_KEYWORDS,
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  category: 'food',
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    locale: 'en_IN',
+    url: '/',
+    siteName: SITE_NAME,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: contact.twitterHandle,
+    creator: contact.twitterHandle,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 },
+  },
+  ...(GOOGLE_VERIFICATION && { verification: { google: GOOGLE_VERIFICATION } }),
+  other: { 'geo.region': 'IN-MP', 'geo.placename': 'Indore' },
+};
+
+export const viewport = {
+  themeColor: '#F4F0E6',
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={jakarta.className}>
+    <html lang="en-IN" className={jakarta.variable}>
+      <body className="bg-ivory font-sans text-charcoal">
+        <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(businessJsonLd)} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(websiteJsonLd)} />
+        {GA_ID && (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+            <Script id="ga4" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`}
+            </Script>
+          </>
+        )}
         <SmoothScroll>
           <Header />
           <main><PageTransition>{children}</PageTransition></main>
