@@ -30,10 +30,10 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-line bg-ivory/90 backdrop-blur">
       <div className="mx-auto flex h-[72px] max-w-[1440px] items-center gap-10 px-5 md:px-12">
-        <Link href="/" className="relative h-10 w-[92px] shrink-0 no-underline">
-          <Image src="/logo-mark.png" alt="ProFit Meals" fill sizes="92px" className="object-contain" priority />
+        <Link href="/" aria-label="ProFit Meals — home" className="shrink-0 no-underline transition-opacity hover:opacity-90">
+          <Image src="/logo.png" alt="ProFit Meals" width={480} height={252} className="h-11 w-auto" priority />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
@@ -45,8 +45,8 @@ export default function Header() {
                 href={n.href}
                 className={`pb-1 text-[15px] font-medium no-underline transition-colors ${
                   active
-                    ? 'border-b-2 border-green text-ink'
-                    : 'border-b-2 border-transparent text-muted hover:text-ink'
+                    ? 'border-b-2 border-forest text-charcoal'
+                    : 'border-b-2 border-transparent text-muted hover:text-charcoal'
                 }`}
               >
                 {n.label}
@@ -58,7 +58,7 @@ export default function Header() {
         <div className="ml-auto flex items-center gap-3">
           <Link
             href="/contact"
-            className="btn-contact hidden h-[42px] items-center rounded-[3px] bg-green px-5 text-[15px] font-medium text-white no-underline transition-[transform,box-shadow,background-color] duration-200 sm:inline-flex"
+            className="btn-contact hidden h-[42px] items-center rounded-full bg-forest hover:bg-forestdeep px-5 text-[15px] font-medium text-ivory no-underline transition-[transform,box-shadow,background-color] duration-200 sm:inline-flex"
           >
             Contact Us
           </Link>
@@ -67,23 +67,21 @@ export default function Header() {
             onClick={() => setOpen(true)}
             className="flex h-11 w-11 flex-col items-center justify-center gap-1 lg:hidden"
           >
-            <span className="h-0.5 w-5 bg-ink" />
-            <span className="h-0.5 w-5 bg-ink" />
-            <span className="h-0.5 w-5 bg-ink" />
+            <span className="h-0.5 w-5 bg-charcoal" />
+            <span className="h-0.5 w-5 bg-charcoal" />
+            <span className="h-0.5 w-5 bg-charcoal" />
           </button>
         </div>
       </div>
 
       {mounted && open && createPortal(
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-white p-5 lg:hidden">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-ivory p-5 lg:hidden">
           <div className="flex items-center justify-between">
-            <div className="relative h-9 w-[82px]">
-              <Image src="/logo-mark.png" alt="ProFit Meals" fill sizes="82px" className="object-contain" />
-            </div>
+            <Image src="/logo.png" alt="ProFit Meals" width={480} height={252} className="h-10 w-auto" />
             <button
               aria-label="Close menu"
               onClick={() => setOpen(false)}
-              className="flex h-11 w-11 items-center justify-center rounded-lg border border-[#CDCDCD] text-lg text-muted"
+              className="flex h-11 w-11 items-center justify-center rounded-lg border border-charcoal/20 text-lg text-muted"
             >
               ✕
             </button>
@@ -94,21 +92,21 @@ export default function Header() {
                 key={n.href}
                 href={n.href}
                 onClick={() => setOpen(false)}
-                className="border-b border-line py-[18px] text-[22px] font-semibold text-ink no-underline hover:text-ink"
+                className="border-b border-line py-[18px] text-[22px] font-semibold text-charcoal no-underline hover:text-charcoal"
               >
                 {n.label}
               </Link>
             ))}
           </div>
           <div className="mt-7 flex flex-col gap-2.5">
-            <Link href="/contact" onClick={() => setOpen(false)} className="btn-contact flex h-[52px] items-center justify-center rounded-[3px] bg-green text-base font-medium text-white no-underline transition-[transform,box-shadow,background-color] duration-200 hover:text-white">
+            <Link href="/contact" onClick={() => setOpen(false)} className="btn-contact flex h-[52px] items-center justify-center rounded-full bg-forest hover:bg-forestdeep text-base font-medium text-ivory no-underline transition-[transform,box-shadow,background-color] duration-200 hover:text-ivory">
               Contact Us
             </Link>
             <a
               href={contact.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-[52px] items-center justify-center gap-2 rounded-[3px] border border-[#CDCDCD] text-base font-medium text-ink no-underline hover:text-ink"
+              className="flex h-[52px] items-center justify-center gap-2 rounded-full border border-charcoal/20 text-base font-medium text-charcoal no-underline hover:text-charcoal"
             >
               <WhatsAppIcon className="h-5 w-5" />
               WhatsApp Us

@@ -28,7 +28,7 @@ function phoneErrorFor(value) {
 function PillGroup({ label, options, value, onChange }) {
   return (
     <div>
-      <span className="text-[13px] font-medium text-ink">{label}</span>
+      <span className="text-[13px] font-medium text-charcoal">{label}</span>
       <div className="mt-2 flex flex-wrap gap-2">
         {options.map((opt) => (
           <button
@@ -37,8 +37,8 @@ function PillGroup({ label, options, value, onChange }) {
             onClick={() => onChange(opt)}
             className={`inline-flex h-10 items-center rounded-full border px-4 text-sm font-medium transition-all duration-150 ${
               value === opt
-                ? 'border-green bg-green text-white shadow-sm'
-                : 'border-[#CDCDCD] bg-white text-ink hover:border-green hover:text-green'
+                ? 'border-forest bg-forest text-ivory shadow-sm'
+                : 'border-charcoal/20 bg-surface text-charcoal hover:border-forest hover:text-forest'
             }`}
           >
             {opt}
@@ -105,14 +105,14 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="rounded-card border border-mintline bg-mint p-10 text-center">
-        <div className="text-[19px] font-semibold text-ink">Thanks — we have your enquiry.</div>
+      <div className="rounded-card border border-line bg-foresttint p-10 text-center">
+        <div className="text-[19px] font-semibold text-charcoal">Thanks — we have your enquiry.</div>
         <p className="mx-auto mt-2 max-w-[360px] text-[15px] leading-relaxed text-muted">
           We will get back to you on WhatsApp shortly.
         </p>
         <button
           onClick={() => setStatus('idle')}
-          className="mt-5 inline-flex h-11 items-center rounded-[3px] border border-[#CDCDCD] px-5 text-[15px] font-medium text-ink"
+          className="mt-5 inline-flex h-11 items-center rounded-full border border-charcoal/20 px-5 text-[15px] font-medium text-charcoal"
         >
           Submit another
         </button>
@@ -134,7 +134,7 @@ export default function ContactForm() {
       {/* Name + Phone */}
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block">
-          <span className="text-[13px] font-medium text-ink">Name</span>
+          <span className="text-[13px] font-medium text-charcoal">Name</span>
           <input
             name="name"
             value={name}
@@ -142,15 +142,15 @@ export default function ContactForm() {
             onChange={(e) => { setName(e.target.value); if (nameError) setNameError(''); }}
             onBlur={() => setNameError(nameErrorFor(name))}
             aria-invalid={!!nameError}
-            className={`mt-1 h-12 w-full rounded-[3px] border px-3 text-[15px] outline-none transition-colors ${
-              nameError ? 'border-ambertx' : 'border-[#CDCDCD] focus:border-green'
+            className={`mt-1 h-12 w-full rounded-xl border px-3 text-[15px] outline-none transition-colors ${
+              nameError ? 'border-warn' : 'border-charcoal/20 focus:border-forest'
             }`}
           />
-          {nameError && <p className="mt-1.5 text-[13px] text-ambertx">{nameError}</p>}
+          {nameError && <p className="mt-1.5 text-[13px] text-warn">{nameError}</p>}
         </label>
 
         <label className="block">
-          <span className="text-[13px] font-medium text-ink">Phone Number</span>
+          <span className="text-[13px] font-medium text-charcoal">Phone Number</span>
           <input
             name="phone"
             type="tel"
@@ -164,22 +164,22 @@ export default function ContactForm() {
             }}
             onBlur={() => setPhoneError(phoneErrorFor(phone))}
             aria-invalid={!!phoneError}
-            className={`mt-1 h-12 w-full rounded-[3px] border px-3 text-[15px] outline-none transition-colors ${
-              phoneError ? 'border-ambertx' : 'border-[#CDCDCD] focus:border-green'
+            className={`mt-1 h-12 w-full rounded-xl border px-3 text-[15px] outline-none transition-colors ${
+              phoneError ? 'border-warn' : 'border-charcoal/20 focus:border-forest'
             }`}
           />
-          {phoneError && <p className="mt-1.5 text-[13px] text-ambertx">{phoneError}</p>}
+          {phoneError && <p className="mt-1.5 text-[13px] text-warn">{phoneError}</p>}
         </label>
       </div>
 
       {/* Meal Type dropdown */}
       <label className="block">
-        <span className="text-[13px] font-medium text-ink">Meal Type</span>
+        <span className="text-[13px] font-medium text-charcoal">Meal Type</span>
         <select
           name="meal_type"
           value={mealType}
           onChange={(e) => setMealType(e.target.value)}
-          className="mt-1 h-12 w-full appearance-none rounded-[3px] border border-[#CDCDCD] bg-white px-3 text-[15px] text-ink outline-none transition-colors focus:border-green"
+          className="mt-1 h-12 w-full appearance-none rounded-xl border border-charcoal/20 bg-surface px-3 text-[15px] text-charcoal outline-none transition-colors focus:border-forest"
         >
           <option value="" disabled>Select a meal type</option>
           {mealTypes.map((t) => (
@@ -195,7 +195,7 @@ export default function ContactForm() {
       <PillGroup label="Meal Slot" options={mealTimes} value={mealTime} onChange={setMealTime} />
 
       {status === 'error' && (
-        <div className="rounded-[3px] bg-amberbg px-3.5 py-2.5 text-[13px] text-ambertx">
+        <div className="rounded-xl bg-warnbg px-3.5 py-2.5 text-[13px] text-warn">
           Something went wrong — please try again or WhatsApp us directly.
         </div>
       )}
@@ -204,7 +204,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="btn-contact inline-flex h-12 items-center rounded-[3px] bg-green px-6 text-[15px] font-medium text-white transition-[transform,box-shadow,background-color] duration-200 disabled:opacity-60"
+          className="btn-contact inline-flex h-12 items-center rounded-full bg-forest hover:bg-forestdeep px-6 text-[15px] font-medium text-ivory transition-[transform,box-shadow,background-color] duration-200 disabled:opacity-60"
         >
           {status === 'loading' ? 'Sending…' : 'Submit Enquiry'}
         </button>

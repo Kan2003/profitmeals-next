@@ -2,8 +2,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import { photo } from '@/lib/data';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = { title: 'About — ProfitMeals' };
+export const metadata = pageMetadata({
+  title: 'About Our Indore Cloud Kitchen',
+  description:
+    'ProFit Meals is an FSSAI-licensed cloud kitchen in Indore cooking high protein veg and non-veg meals for people who count what they eat. Sourced, weighed, cooked and packed every morning.',
+  path: '/about/',
+  keywords: ['FSSAI cloud kitchen Indore', 'healthy food kitchen Indore'],
+});
 
 const steps = [
   ['Sourced', 'Produce and protein arrive before the kitchen opens.', 'photo-1518843875459-f738682238a6'],
@@ -31,18 +38,18 @@ const stats = [['30g+', 'protein in most meals'], ['40+', 'meals on rotation'], 
 
 export default function AboutPage() {
   return (
-    <div className="bg-sand">
-      <section className="border-b border-sandline bg-sanddeep">
+    <div className="bg-ivory">
+      <section className="border-b border-line bg-ivorydeep">
         <div className="mx-auto max-w-[1440px] px-5 py-14 md:px-12 md:py-16">
           <div className="text-[13px] text-faint">Home / About</div>
           <div className="mt-3.5 grid items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
             <div>
               <div className="text-xs tracking-[0.1em] text-faint">OUR STORY</div>
-              <h1 className="mt-3 text-[36px] font-semibold leading-[1.05] tracking-[-0.03em] text-ink md:text-[52px]">
+              <h1 className="mt-3 text-[36px] font-bold leading-[1.05] tracking-[-0.03em] text-charcoal md:text-[52px]">
                 One kitchen, built for people who count what they eat.
               </h1>
               <p className="mt-4 max-w-[520px] text-[17px] leading-relaxed text-muted md:text-lg">
-                ProfitMeals started as a small cloud kitchen cooking for a handful of gym members who were tired of weighing chicken at midnight. The menu grew, the kitchen grew, the idea did not change.
+                ProFit Meals started as a small cloud kitchen cooking for a handful of gym members who were tired of weighing chicken at midnight. The menu grew, the kitchen grew, the idea did not change.
               </p>
             </div>
             <div className="relative h-[260px] overflow-hidden rounded-2xl bg-line md:h-[360px]">
@@ -60,7 +67,7 @@ export default function AboutPage() {
             </div>
             <div className="order-1 lg:order-2">
               <div className="text-xs tracking-[0.1em] text-faint">WHY WE STARTED</div>
-              <h2 className="mt-3 text-[26px] font-semibold leading-tight tracking-[-0.02em] text-ink md:text-[34px]">
+              <h2 className="mt-3 text-[26px] font-bold leading-tight tracking-[-0.02em] text-charcoal md:text-[34px]">
                 Eating well took too much effort.
               </h2>
               <p className="mt-3.5 text-base leading-relaxed text-muted">
@@ -74,16 +81,16 @@ export default function AboutPage() {
           <div className="mt-16 grid items-center gap-14 lg:grid-cols-2">
             <div>
               <div className="text-xs tracking-[0.1em] text-faint">OUR APPROACH TO NUTRITION</div>
-              <h2 className="mt-3 text-[26px] font-semibold leading-tight tracking-[-0.02em] text-ink md:text-[34px]">
+              <h2 className="mt-3 text-[26px] font-bold leading-tight tracking-[-0.02em] text-charcoal md:text-[34px]">
                 Numbers first, flavour never second.
               </h2>
               <p className="mt-3.5 text-base leading-relaxed text-muted">
                 Every recipe is built to a macro target before it is cooked, then tasted until it earns a place on the menu. If a dish hits the numbers and nobody wants a second bite, it does not ship.
               </p>
-              <div className="mt-7 flex flex-wrap gap-8 border-t border-sandline pt-5">
+              <div className="mt-7 flex flex-wrap gap-8 border-t border-line pt-5">
                 {stats.map(([v, l]) => (
                   <div key={l}>
-                    <div className="text-[28px] font-semibold text-ink">{v}</div>
+                    <div className="text-[28px] font-extrabold tabular-nums text-charcoal">{v}</div>
                     <div className="mt-0.5 text-[13px] text-muted">{l}</div>
                   </div>
                 ))}
@@ -98,17 +105,17 @@ export default function AboutPage() {
 
       <section className="mx-auto max-w-[1440px] px-5 pb-16 md:px-12">
         <div className="text-xs tracking-[0.1em] text-faint">HOW WE PREPARE YOUR MEALS</div>
-        <h2 className="mt-3 text-[26px] font-semibold leading-tight tracking-[-0.02em] text-ink md:text-[34px]">Four steps, every morning.</h2>
+        <h2 className="mt-3 text-[26px] font-bold leading-tight tracking-[-0.02em] text-charcoal md:text-[34px]">Four steps, every morning.</h2>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map(([t, s, seed], i) => (
             <Reveal key={t} delay={i * 60}>
-              <div className="h-full overflow-hidden rounded-card border border-line bg-white">
+              <div className="h-full overflow-hidden rounded-card border border-line bg-surface">
                 <div className="relative h-40 w-full bg-line">
                   <Image src={photo(seed, 600)} alt={t} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover" />
                 </div>
                 <div className="p-5">
-                  <span className="grid h-7 w-7 place-items-center rounded-full bg-ink text-[13px] font-semibold text-white">{i + 1}</span>
-                  <div className="mt-3.5 text-[17px] font-semibold text-ink">{t}</div>
+                  <span className="grid h-7 w-7 place-items-center rounded-full bg-charcoal text-[13px] font-semibold text-ivory">{i + 1}</span>
+                  <div className="mt-3.5 text-[17px] font-semibold text-charcoal">{t}</div>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted">{s}</p>
                 </div>
               </div>
@@ -120,9 +127,9 @@ export default function AboutPage() {
       <section className="mx-auto max-w-[1440px] px-5 pb-16 md:px-12">
         <div className="grid gap-8 lg:grid-cols-2">
           {panels.map((p) => (
-            <div key={p.label} className="rounded-2xl border border-sandline bg-white p-7 md:p-9">
+            <div key={p.label} className="rounded-2xl border border-line bg-surface p-7 md:p-9">
               <div className="text-xs tracking-[0.1em] text-faint">{p.label}</div>
-              <h2 className="mt-2.5 text-[24px] font-semibold leading-tight tracking-[-0.02em] text-ink md:text-[28px]">{p.title}</h2>
+              <h2 className="mt-2.5 text-[24px] font-bold leading-tight tracking-[-0.02em] text-charcoal md:text-[28px]">{p.title}</h2>
               <p className="mt-3 text-[15px] leading-relaxed text-muted">{p.body}</p>
               <div className="mt-5 grid grid-cols-3 gap-2.5">
                 {p.seeds.map((s) => (
@@ -139,12 +146,12 @@ export default function AboutPage() {
       <section className="bg-forest">
         <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-8 px-5 py-14 md:px-12">
           <div>
-            <h2 className="text-[30px] font-semibold leading-tight tracking-[-0.02em] text-white md:text-[40px]">Ready to Eat Better?</h2>
-            <p className="mt-2.5 text-base text-[#D9EDD7]">Explore our meals and find something that fits your goals.</p>
+            <h2 className="text-[30px] font-bold leading-tight tracking-[-0.02em] text-ivory md:text-[40px]">Ready to Eat Better?</h2>
+            <p className="mt-2.5 text-base text-ivory/75">Explore our meals and find something that fits your goals.</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link href="/meal-plans" className="inline-flex h-[52px] items-center rounded-[3px] bg-white px-6 text-base font-medium text-forest no-underline hover:text-forest">View Meal Plans</Link>
-            <Link href="/contact" className="inline-flex h-[52px] items-center rounded-[3px] border border-white/50 px-6 text-base font-medium text-white no-underline hover:text-white">Contact Us</Link>
+            <Link href="/meal-plans" className="inline-flex h-[52px] items-center rounded-full bg-ivory px-6 text-base font-medium text-forest no-underline hover:text-forest">View Meal Plans</Link>
+            <Link href="/contact" className="inline-flex h-[52px] items-center rounded-full border border-ivory/50 px-6 text-base font-medium text-ivory no-underline hover:text-ivory">Contact Us</Link>
           </div>
         </div>
       </section>

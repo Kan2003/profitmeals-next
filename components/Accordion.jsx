@@ -14,7 +14,7 @@ export default function Accordion({ items, defaultOpen = 0 }) {
               onClick={() => setOpen(isOpen ? -1 : i)}
               className="flex w-full items-center justify-between gap-3 py-[18px] text-left"
             >
-              <span className="text-base font-medium text-ink">{it.q}</span>
+              <span className="text-base font-medium text-charcoal">{it.q}</span>
               <span className="text-xl text-faint">{isOpen ? '−' : '+'}</span>
             </button>
             <div
