@@ -137,9 +137,9 @@ export default function WhyUsPage() {
             <h2 className="text-[30px] font-bold leading-tight tracking-[-0.02em] text-ivory md:text-[40px]">Ready to Eat Better?</h2>
             <p className="mt-2.5 text-base text-ivory/75">Explore our meals and find something that fits your goals.</p>
           </div>
-          <div className="flex flex-wrap gap-3">
-            <Link href="/meal-plans" className="inline-flex h-[52px] items-center rounded-full bg-ivory px-6 text-base font-medium text-forest no-underline hover:text-forest">View Meal Plans</Link>
-            <Link href="/contact" className="inline-flex h-[52px] items-center rounded-full border border-ivory/50 px-6 text-base font-medium text-ivory no-underline hover:text-ivory">Contact Us</Link>
+          <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+            <Link href="/meal-plans" className="inline-flex h-[52px] items-center justify-center rounded-full bg-ivory px-6 text-base font-medium text-forest no-underline hover:text-forest">View Meal Plans</Link>
+            <Link href="/contact" className="inline-flex h-[52px] items-center justify-center rounded-full border border-ivory/50 px-6 text-base font-medium text-ivory no-underline hover:text-ivory">Contact Us</Link>
           </div>
         </div>
       </section>

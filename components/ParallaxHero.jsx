@@ -1,13 +1,14 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { prefersReducedMotion } from '@/lib/motion';
 
 export default function ParallaxHero({ children, strength = 0.12 }) {
   const ref = useRef(null);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || prefersReducedMotion()) return;
 
     let frame;
     function update() {

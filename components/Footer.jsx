@@ -7,8 +7,8 @@ export default function Footer() {
   return (
     <footer className="border-t border-line bg-ivorydeep">
       <div className="mx-auto max-w-[1440px] px-5 pb-8 pt-14 md:px-12">
-        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
-          <div>
+        <div className="grid grid-cols-2 gap-x-6 gap-y-9 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-10">
+          <div className="col-span-2 md:col-span-1">
             <Link href="/" aria-label="ProFit Meals — home" className="inline-block no-underline">
               <Image src="/logo.png" alt="ProFit Meals" width={480} height={252} className="h-14 w-auto" />
             </Link>
@@ -56,14 +56,14 @@ export default function Footer() {
             <Link className="text-sm text-muted no-underline hover:text-charcoal" href="/contact#faq">FAQ</Link>
             <Link className="text-sm text-muted no-underline hover:text-charcoal" href="/contact">Contact</Link>
           </div>
-          <div className="flex flex-col gap-2.5">
+          <div className="col-span-2 flex flex-col gap-2.5 md:col-span-1">
             <div className="text-[13px] font-semibold text-charcoal">Reach us</div>
-            <span className="text-sm text-muted">{contact.phone}</span>
-            <span className="text-sm text-muted">{contact.email}</span>
+            <a className="text-sm text-muted no-underline hover:text-charcoal" href={contact.phoneHref}>{contact.phone}</a>
+            <a className="text-sm text-muted no-underline hover:text-charcoal" href={contact.emailHref}>{contact.email}</a>
             <span className="text-sm text-muted">{contact.serviceArea}</span>
           </div>
         </div>
-        <div className="mt-9 border-t border-line pt-5 text-xs text-faint">
+        <div className="mt-9 border-t border-line pt-5 text-center text-xs text-faint md:text-left">
           © {new Date().getFullYear()} ProFit Meals. All rights reserved.
         </div>
       </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { prefersReducedMotion } from '@/lib/motion';
 
 export default function CountUp({ value, suffix = '', duration = 1400 }) {
   const numeric = parseFloat(value);
@@ -14,6 +15,12 @@ export default function CountUp({ value, suffix = '', duration = 1400 }) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    // No counting animation for reduced-motion users — show the final number straight away.
+    if (prefersReducedMotion()) {
+      setDisplay(String(value));
+      return;
+    }
 
     const io = new IntersectionObserver(
       ([entry]) => {
@@ -40,7 +47,7 @@ export default function CountUp({ value, suffix = '', duration = 1400 }) {
 
     io.observe(el);
     return () => io.disconnect();
-  }, [numeric, duration, isDecimal, decimals]);
+  }, [value, numeric, duration, isDecimal, decimals]);
 
   return (
     <span ref={ref}>

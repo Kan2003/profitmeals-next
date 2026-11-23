@@ -51,7 +51,7 @@ export default function MealPlansPage() {
         <div className="grid gap-5 lg:grid-cols-3">
           {plans.map((p, i) => (
             <Reveal key={p.slug} delay={i * 70}>
-              <div className={`relative h-full rounded-2xl bg-surface p-7 transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_16px_32px_rgba(36,39,36,0.08)] ${p.popular ? 'border-2 border-forest' : 'border border-line'}`}>
+              <div id={p.slug} className={`relative h-full scroll-mt-28 rounded-2xl bg-surface p-7 transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_16px_32px_rgba(36,39,36,0.08)] ${p.popular ? 'border-2 border-forest' : 'border border-line'}`}>
                 {p.popular && (
                   <span className="absolute -top-3 left-7 inline-flex h-6 items-center rounded-full bg-forest px-3 text-xs font-medium text-ivory">
                     Most popular
