@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { contact } from '@/lib/data';
 import { WhatsAppIcon } from './SocialIcons';
@@ -19,8 +19,44 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+  const menuRef = useRef(null);
+  const openButtonRef = useRef(null);
+  const closeButtonRef = useRef(null);
 
   useEffect(() => setMounted(true), []);
+
+  // Mobile menu keyboard support: Escape closes it, Tab/Shift+Tab stay inside it,
+  // and focus goes back to the menu button when it closes.
+  useEffect(() => {
+    if (!open) return;
+    closeButtonRef.current?.focus();
+
+    function onKeyDown(e) {
+      if (e.key === 'Escape') {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== 'Tab' || !menuRef.current) return;
+      const focusable = menuRef.current.querySelectorAll('a[href], button:not([disabled])');
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && (document.activeElement === first || !menuRef.current.contains(document.activeElement))) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && (document.activeElement === last || !menuRef.current.contains(document.activeElement))) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener('keydown', onKeyDown);
+    const opener = openButtonRef.current;
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      opener?.focus();
+    };
+  }, [open]);
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -63,7 +99,11 @@ export default function Header() {
             Contact Us
           </Link>
           <button
+            ref={openButtonRef}
+            type="button"
             aria-label="Open menu"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
             onClick={() => setOpen(true)}
             className="flex h-11 w-11 flex-col items-center justify-center gap-1 lg:hidden"
           >
@@ -75,10 +115,19 @@ export default function Header() {
       </div>
 
       {mounted && open && createPortal(
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-ivory p-5 lg:hidden">
+        <div
+          ref={menuRef}
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site menu"
+          className="fixed inset-0 z-50 overflow-y-auto bg-ivory p-5 lg:hidden"
+        >
           <div className="flex items-center justify-between">
             <Image src="/logo.png" alt="ProFit Meals" width={480} height={252} className="h-10 w-auto" />
             <button
+              ref={closeButtonRef}
+              type="button"
               aria-label="Close menu"
               onClick={() => setOpen(false)}
               className="flex h-11 w-11 items-center justify-center rounded-lg border border-charcoal/20 text-lg text-muted"

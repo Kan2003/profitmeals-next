@@ -40,6 +40,9 @@ export const metadata = {
   creator: SITE_NAME,
   publisher: SITE_NAME,
   category: 'food',
+  // Stop iOS Safari from turning plain-text phone numbers/emails into links (they inherited
+  // the global forest link colour and vanished on the dark CTA sections).
+  formatDetection: { telephone: false, email: false, address: false },
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',

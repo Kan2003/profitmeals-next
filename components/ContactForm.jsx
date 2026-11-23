@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 
 const mealTypes = [
   { value: 'low-carbs-high-protein', label: 'Low Carbs, High Protein' },
@@ -26,14 +26,16 @@ function phoneErrorFor(value) {
 }
 
 function PillGroup({ label, options, value, onChange }) {
+  const labelId = useId();
   return (
-    <div>
-      <span className="text-[13px] font-medium text-charcoal">{label}</span>
+    <div role="group" aria-labelledby={labelId}>
+      <span id={labelId} className="text-[13px] font-medium text-charcoal">{label}</span>
       <div className="mt-2 flex flex-wrap gap-2">
         {options.map((opt) => (
           <button
             type="button"
             key={opt}
+            aria-pressed={value === opt}
             onClick={() => onChange(opt)}
             className={`inline-flex h-10 items-center rounded-full border px-4 text-sm font-medium transition-all duration-150 ${
               value === opt

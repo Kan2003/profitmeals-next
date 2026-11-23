@@ -15,6 +15,15 @@ body {
 
 a { color: #183A32; }
 
+/* iOS Safari auto-links phone numbers/emails; keep them in the surrounding text colour
+   so they don't turn forest-on-forest (invisible) inside dark sections. */
+a[x-apple-data-detectors],
+a[href^="tel:"]:not([class]),
+a[href^="mailto:"]:not([class]) {
+  color: inherit !important;
+  text-decoration: inherit !important;
+}
+
 ::selection { background: #183A32; color: #F4F0E6; }
 
 /* Visible keyboard focus in brand green */

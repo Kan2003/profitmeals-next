@@ -77,14 +77,14 @@ export default function Home() {
             <h2 className="text-[26px] font-bold leading-tight tracking-[-0.02em] text-charcoal md:text-[40px]">
               Meals Built Around Your Goals
             </h2>
-            <p className="mt-2 text-base text-muted">Pick a goal and we will show you the meals that fit it.</p>
+            <p className="mt-2 text-base text-muted">Tap one to see what it includes and how to order.</p>
           </Reveal>
           {/* Horizontal scroll on mobile, grid on sm+ */}
           <div className="-mx-5 mt-6 flex gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 sm:px-0 md:mt-8 lg:grid-cols-4">
             {goals.map((g, i) => (
               <Reveal key={g.title} delay={i * 60} className="shrink-0 sm:shrink sm:h-full">
                 <Link
-                  href="/meal-plans"
+                  href={g.href}
                   className="group flex h-full min-w-[220px] flex-col overflow-hidden rounded-card border border-line bg-surface no-underline transition-all duration-200 hover:-translate-y-1.5 hover:border-forest hover:shadow-[0_16px_32px_rgba(36,39,36,0.10)] sm:min-w-0"
                 >
                   <div className="relative h-[130px] w-full shrink-0 overflow-hidden bg-line">
@@ -230,28 +230,48 @@ export default function Home() {
 
       {/* CTA — forest */}
       <section className="bg-forest">
-        <div className="mx-auto flex max-w-[1440px] flex-wrap items-end justify-between gap-12 px-5 py-16 md:px-12 md:py-[72px]">
+        <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-14 md:px-12 md:py-[72px] lg:grid-cols-[1fr_auto] lg:items-end lg:gap-12">
           <div>
-            <h2 className="text-[32px] font-bold leading-tight tracking-[-0.02em] text-ivory md:text-[44px]">
+            <h2 className="text-[30px] font-bold leading-tight tracking-[-0.02em] text-ivory md:text-[44px]">
               Ready to Eat Better?
             </h2>
-            <p className="mt-3 text-[17px] text-ivory/75">Explore our meals and find something that fits your goals.</p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link href="/meal-plans" className="inline-flex h-[52px] items-center rounded-full bg-ivory px-6 text-base font-medium text-forest no-underline hover:text-forest">
+            <p className="mt-3 text-base text-ivory/75 md:text-[17px]">Explore our meals and find something that fits your goals.</p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <Link href="/meal-plans" className="inline-flex h-[52px] items-center justify-center rounded-full bg-ivory px-6 text-base font-medium text-forest no-underline hover:text-forest">
                 View Meal Plans
               </Link>
-              <Link href="/contact" className="inline-flex h-[52px] items-center rounded-full border border-ivory/50 px-6 text-base font-medium text-ivory no-underline hover:text-ivory">
+              <Link href="/contact" className="inline-flex h-[52px] items-center justify-center rounded-full border border-ivory/50 px-6 text-base font-medium text-ivory no-underline hover:text-ivory">
                 Contact Us
               </Link>
             </div>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {[['WhatsApp', contact.phone], ['Phone', contact.phone], ['Instagram', contact.instagramHandle], ['Service area', contact.serviceArea]].map(([l, v]) => (
-              <div key={l} className="w-[190px] rounded-[10px] border border-ivory/30 p-3.5">
-                <div className="text-[11px] text-ivory/75">{l}</div>
-                <div className="text-[15px] font-semibold text-ivory">{v}</div>
-              </div>
-            ))}
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              ['WhatsApp', contact.phone, contact.whatsappHref],
+              ['Phone', contact.phone, contact.phoneHref],
+              ['Instagram', contact.instagramHandle, contact.instagramHref],
+              ['Service area', contact.serviceArea, '/contact'],
+            ].map(([l, v, href]) => {
+              const className = `block min-w-0 rounded-[10px] border border-ivory/30 p-3.5 no-underline transition-colors hover:border-ivory/70 hover:bg-ivory/5 lg:w-[210px] ${l === 'Service area' ? 'col-span-2 lg:col-span-1' : ''}`;
+              const body = (
+                <>
+                  <div className="text-[11px] text-ivory/75">{l}</div>
+                  <div className="break-words text-[15px] font-semibold text-ivory">{v}</div>
+                </>
+              );
+              if (href.startsWith('/')) return <Link key={l} href={href} className={className}>{body}</Link>;
+              const external = href.startsWith('http');
+              return (
+                <a
+                  key={l}
+                  href={href}
+                  className={className}
+                  {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
+                >
+                  {body}
+                </a>
+              );
+            })}
           </div>
         </div>
       </section>

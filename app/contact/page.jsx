@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Accordion from '@/components/Accordion';
 import ContactForm from '@/components/ContactForm';
-import { contact, deliveryAreas, faqs, photo, zones } from '@/lib/data';
+import { contact, deliveryAreas, faqs, photo } from '@/lib/data';
 import { InstagramIcon, MailIcon, PhoneIcon, WhatsAppIcon } from '@/components/SocialIcons';
 import { faqJsonLd, jsonLd, pageMetadata } from '@/lib/seo';
 

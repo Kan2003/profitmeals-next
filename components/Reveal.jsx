@@ -1,13 +1,14 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { prefersReducedMotion } from '@/lib/motion';
 
 export default function Reveal({ children, delay = 0, className = '' }) {
   const ref = useRef(null);
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (prefersReducedMotion()) {
       setShown(true);
       return;
     }
